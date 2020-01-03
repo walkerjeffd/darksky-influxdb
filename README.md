@@ -28,9 +28,27 @@ darksky:
 
 ## Set Up InfluxDB
 
-Run the InfluxDB initialization script to create a new database (named `weather`) and set up retention policies and continuous queries. To use a different database name, run the commands interactively.
+Run the InfluxDB initialization script to create a new database (named `weather`) and set up retention policies and continuous queries. To use a different database name, modify the commands and run each one interactively.
 
 ```sh
 influx -import -path influxdb/init.txt
+```
+
+## Data Queries
+
+The tracker will save raw (`currently`) Dark Sky API data to the `darksky_raw` measurement, which will be retained for 30 days per the `autogen` retention policy (RP).
+
+The continuous queries (CQs) will aggregate these raw measurements to hourly and daily timesteps (measurements `darksky_1h` and `darksky_1d`), which will be retained forever per the `infinite` RP.
+
+To query the data from the InfluxDB CLI:
+
+```sh
+$ influx -precision rfc3339 -database 'weather'
+```
+
+```sql
+select * from darksky_raw order by time desc limit 5; -- last 5 raw measurements
+select * from darksky_1h order by time desc limit 24; -- last 24 hourly values
+select * from darksky_1d order by time desc limit 7; -- last 7 daily values
 ```
 
