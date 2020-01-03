@@ -1,0 +1,16 @@
+{
+  "name": "darksky-influxdb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/walkerjeffd/darksky-influxdb.git",
+  "author": "Jeffrey Walker",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "config": "^3.2.4",
+    "darksky-node": "^0.0.2",
+    "influx": "^5.5.1",
+    "js-yaml": "^3.13.1",
+    "node-cron": "^2.0.3"
+  }
+}
