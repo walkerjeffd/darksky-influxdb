@@ -43,7 +43,7 @@ The continuous queries (CQs) will aggregate these raw measurements to hourly and
 To query the data from the InfluxDB CLI:
 
 ```sh
-$ influx -precision rfc3339 -database 'weather'
+influx -precision rfc3339 -database 'weather'
 ```
 
 ```sql
@@ -51,4 +51,3 @@ select * from darksky_raw order by time desc limit 5; -- last 5 raw measurements
 select * from darksky_1h order by time desc limit 24; -- last 24 hourly values
 select * from darksky_1d order by time desc limit 7; -- last 7 daily values
 ```
-
