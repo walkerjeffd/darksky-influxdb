@@ -1,0 +1,7 @@
+CREATE DATABASE weather
+
+CREATE RETENTION POLICY "infinite" ON weather DURATION Inf REPLICATION 1
+ALTER RETENTION POLICY "autogen" ON weather DURATION 30d REPLICATION 1
+
+CREATE CONTINUOUS QUERY cq_darksky_1h ON weather BEGIN SELECT mean(temperature) AS temperature, mean(humidity) AS humidity, mean(precip_intensity) AS precip_intensity, mean(cloud_cover) AS cloud_cover, mean(wind_speed) AS wind_speed INTO weather.infinite.darksky_1h FROM darksky_raw GROUP BY time(1h),* END
+CREATE CONTINUOUS QUERY cq_darksky_1d ON weather BEGIN select mean(temperature) AS temperature_mean, min(temperature) AS temperature_min, max(temperature) AS temperature_max, mean(humidity) AS humidity_mean, min(humidity) AS humidity_min, max(humidity) AS humidity_max, mean(precip_intensity) AS precip_intensity_mean, max(precip_intensity) AS precip_intensity_max, mean(cloud_cover) AS cloud_cover_mean, mean(wind_speed) AS wind_speed_mean INTO weather.infinite.darksky_1d FROM darksky_raw GROUP BY time(1d),* tz('America/New_York') END
