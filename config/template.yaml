@@ -1,8 +1,8 @@
 cron:
   interval: '*/5 * * * *'
 influx:
-  host:
-  database:
+  host: localhost
+  database: weather
 darksky:
   key:
   units: us

@@ -16,9 +16,8 @@ cp config/template.yaml config/default.yaml
 cron:
   schedule: '<CRON INTERVAL, default=*/5 * * * * (every 5 minutes)>'
 influx:
-  host: <DATABASE HOST>
-  database: <DATABASE NAME>
-  measurement: <MEASUREMENT NAME>
+  host: <DATABASE HOST, default=localhost>
+  database: <DATABASE NAME, default=weather>
 darksky:
   key: <DARK SKY API>
   units: <DARK SKY UNITS, default=us>
@@ -32,6 +31,20 @@ Run the InfluxDB initialization script to create a new database (named `weather`
 
 ```sh
 influx -import -path influxdb/init.txt
+```
+
+## Run Tracker
+
+Simply run the `index.js` script to run the tracker. Data will be fetched periodically according to the `cron.interval` specified in the configuration file.
+
+```sh
+node index.js
+```
+
+Alternatively, use a process manage like `pm2` to run the tracker as a daemon.
+
+```sh
+pm2 start index.js --name darksky
 ```
 
 ## Data Queries
