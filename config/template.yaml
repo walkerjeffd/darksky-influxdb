@@ -1,5 +1,5 @@
 cron:
-  interval: '*/5 * * * *'
+  interval: '0 */5 * * * *'
 influx:
   host: localhost
   database: weather

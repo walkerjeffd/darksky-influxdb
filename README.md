@@ -14,7 +14,7 @@ cp config/template.yaml config/default.yaml
 
 ```yaml
 cron:
-  schedule: '<CRON INTERVAL, default=*/5 * * * * (every 5 minutes)>'
+  schedule: '<CRON INTERVAL, default=0 */5 * * * * (every 5 minutes)>'
 influx:
   host: <DATABASE HOST, default=localhost>
   database: <DATABASE NAME, default=weather>
